@@ -1,21 +1,18 @@
-// server.js
-import express from 'express';
-import connectDB from './db.js';
-import dataRoutes from './routes/data.js';
-
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Connect to MongoDB
-connectDB();
-
-// Middleware
+app.use(cors()); // 👈 Add this line
 app.use(express.json());
 
-// Routes
-app.use('/api', dataRoutes);
+// Your routes
+app.get("/api/data", (req, res) => {
+  res.json([
+    { lat: 20.5, lng: 78.9, animal: "Tiger" },
+    { lat: 11.5, lng: 76.3, animal: "Elephant" },
+  ]);
+});
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(3001, () => {
+  console.log("Server running on port 3001");
 });
