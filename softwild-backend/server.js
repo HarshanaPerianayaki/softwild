@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const app = express();
+// ✅ Replace require() with import
+import express from "express";
+import cors from "cors";
 
-app.use(cors()); // 👈 Add this line
+const app = express();
+app.use(cors());
 app.use(express.json());
 
-// Your routes
 app.get("/api/data", (req, res) => {
   res.json([
     { lat: 20.5, lng: 78.9, animal: "Tiger" },
@@ -13,6 +13,7 @@ app.get("/api/data", (req, res) => {
   ]);
 });
 
-app.listen(3001, () => {
-  console.log("Server running on port 3001");
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
